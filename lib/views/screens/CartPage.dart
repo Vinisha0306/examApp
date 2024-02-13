@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:examapp/utils/all_product_data.dart';
+import 'package:examapp/views/commponets/row1.dart';
+import 'package:examapp/views/commponets/row2.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -19,26 +21,18 @@ class _CartPageState extends State<CartPage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          children: cartProducts
-              .map(
-                (e) => Container(
-                  height: size.height * 0.3,
-                  width: size.width * 0.9,
-                  margin: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 5,
-                        offset: Offset(3, 3),
-                      )
-                    ],
-                  ),
-                ),
-              )
-              .toList(),
+          children: List.generate(
+            products.length ~/ 2,
+            (index) => SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  drow1(size: size, index: index, context: context),
+                  drow2(size: size, index: index, context: context),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

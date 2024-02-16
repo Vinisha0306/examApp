@@ -16,17 +16,36 @@ class _CartPageState extends State<CartPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('cart page'),
+        title: const Text(
+          'cart page',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: List.generate(
-            products.length ~/ 2,
+            cartProducts.length ~/ 2,
             (index) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [],
+                children: [
+                  crow1(
+                      size: size,
+                      data: cartProducts,
+                      context: context,
+                      index: index),
+                  SizedBox(
+                    width: size.width * 0.03,
+                  ),
+                  crow2(
+                      size: size,
+                      data: cartProducts,
+                      context: context,
+                      index: index),
+                ],
               ),
             ),
           ),

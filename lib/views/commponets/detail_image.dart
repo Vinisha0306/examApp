@@ -23,7 +23,3 @@ Widget Image1({required size, required data, required index}) {
     ),
   );
 }
-
-Widget details() {
-  return Container();
-}

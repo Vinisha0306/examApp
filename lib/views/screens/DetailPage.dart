@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:examapp/utils/all_product_data.dart';
 import 'package:examapp/utils/MyRoutes.dart';
 import 'package:examapp/views/commponets/detail_image.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -35,16 +36,62 @@ class _DetailState extends State<DetailPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Column(
-            children: [
-              Row(
-                children: List.generate(data['images'].length,
-                    (index) => Image1(size: size, data: data, index: index)),
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Column(
+                children: [
+                  Row(
+                    children: List.generate(
+                        data['images'].length,
+                        (index) =>
+                            Image1(size: size, data: data, index: index)),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    data['title'],
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    "\$ ${data['price'].toString()}",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  Text(
+                    data['description'],
+                    style: const TextStyle(
+                      color: Colors.black54,
+                      fontSize: 12,
+                    ),
+                  ),
+                  RatingBarIndicator(
+                    rating: double.parse(data['rating'].toString()),
+                    itemBuilder: (context, index) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 20.0,
+                    direction: Axis.horizontal,
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -57,13 +104,13 @@ class _DetailState extends State<DetailPage> {
           late SnackBar snackBar;
 
           if (cartProducts.contains(data)) {
-            cartProducts.add(data);
+            cartProducts.remove(data);
             snackBar = SnackBar(
                 content: Text("${data['title']} remove from the CART !!"),
                 backgroundColor: Colors.red,
                 behavior: SnackBarBehavior.floating);
           } else {
-            cartProducts.remove(data);
+            cartProducts.add(data);
             snackBar = SnackBar(
                 content: Text("${data['title']} add the CART !!"),
                 backgroundColor: Colors.green,

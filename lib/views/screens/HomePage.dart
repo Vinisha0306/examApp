@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:examapp/utils/MyRoutes.dart';
 import 'package:examapp/views/commponets/ad_container.dart';
 import 'package:examapp/views/commponets/category.dart';
@@ -15,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> allCategories = [];
+  late String cat = 'no';
 
   @override
   void initState() {
@@ -78,7 +81,17 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: allCategories
                     .map(
-                      (e) => category(size: size, e: e),
+                      (e) => GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              cat = e;
+                              log(cat);
+                            },
+                          );
+                        },
+                        child: category(size: size, e: e, cat: cat),
+                      ),
                     )
                     .toList(),
               ),
@@ -93,8 +106,22 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          row1(size: size, index: index, context: context),
-                          row2(size: size, index: index, context: context),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    MyRoutes.DetailPage,
+                                    arguments: products[index * 2]);
+                              },
+                              child: row1(
+                                  size: size, index: index, context: context)),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    MyRoutes.DetailPage,
+                                    arguments: products[index * 2 + 1]);
+                              },
+                              child: row2(
+                                  size: size, index: index, context: context)),
                         ],
                       ),
                     ),

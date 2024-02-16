@@ -26,10 +26,7 @@ class _CartPageState extends State<CartPage> {
             (index) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  drow1(size: size, index: index, context: context),
-                  drow2(size: size, index: index, context: context),
-                ],
+                children: [],
               ),
             ),
           ),

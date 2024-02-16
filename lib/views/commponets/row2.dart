@@ -4,91 +4,10 @@ import 'package:examapp/utils/all_product_data.dart';
 import 'package:examapp/utils/MyRoutes.dart';
 
 Widget row2({required size, required index, required context}) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.of(context)
-          .pushNamed(MyRoutes.DetailPage, arguments: products[index * 2 + 1]);
-    },
-    child: Container(
-      height: size.height * 0.35,
-      width: size.width * 0.45,
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 10,
-            offset: Offset(3, 3),
-          )
-        ],
-      ),
-      child: Column(
-        children: [
-          Container(
-            height: size.height * 0.2,
-            width: size.width * 0.6,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: NetworkImage(
-                  products[index * 2 + 1]['thumbnail'].toString(),
-                ),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  products[index * 2 + 1]['title'],
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  products[index * 2 + 1]['description'],
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                  ),
-                ),
-                Text(
-                  " ${products[index * 2]['category']}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-                Text(
-                  "\$ ${products[index * 2 + 1]['price'].toString()}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget drow2({required size, required index, required context}) {
   return Container(
-    height: size.height * 0.35,
+    height: size.height * 0.36,
     width: size.width * 0.45,
-    margin: const EdgeInsets.all(1),
+    margin: const EdgeInsets.all(10),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: Colors.white,
@@ -109,19 +28,20 @@ Widget drow2({required size, required index, required context}) {
             shape: BoxShape.circle,
             image: DecorationImage(
               image: NetworkImage(
-                cartProducts[index * 2]['thumbnail'].toString(),
+                products[index * 2 + 1]['thumbnail'].toString(),
               ),
               fit: BoxFit.cover,
             ),
           ),
         ),
         Container(
+          padding: EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                cartProducts[index * 2]['title'],
+                products[index * 2 + 1]['title'],
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
@@ -129,23 +49,22 @@ Widget drow2({required size, required index, required context}) {
                 ),
               ),
               Text(
-                cartProducts[index * 2 + 1]['description'],
+                products[index * 2 + 1]['description'],
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontSize: 12,
                 ),
               ),
               Text(
-                " ${cartProducts[index * 2]['category']}",
+                products[index * 2 + 1]['category'],
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                 ),
               ),
               Text(
-                "\$ ${cartProducts[index * 2]['price'].toString()}",
+                "\$ ${products[index * 2 + 1]['price'].toString()}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,

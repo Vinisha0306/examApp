@@ -7,10 +7,10 @@ class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
 
   @override
-  State<DetailPage> createState() => _detailState();
+  State<DetailPage> createState() => _DetailState();
 }
 
-class _detailState extends State<DetailPage> {
+class _DetailState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -57,15 +57,15 @@ class _detailState extends State<DetailPage> {
           late SnackBar snackBar;
 
           if (cartProducts.contains(data)) {
-            cartProducts.remove(data);
+            cartProducts.add(data);
             snackBar = SnackBar(
                 content: Text("${data['title']} remove from the CART !!"),
                 backgroundColor: Colors.red,
                 behavior: SnackBarBehavior.floating);
           } else {
-            cartProducts.add(data);
+            cartProducts.remove(data);
             snackBar = SnackBar(
-                content: Text("${data['title']} remove from the CART !!"),
+                content: Text("${data['title']} add the CART !!"),
                 backgroundColor: Colors.green,
                 behavior: SnackBarBehavior.floating);
           }

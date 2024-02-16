@@ -18,8 +18,12 @@ Widget Image1({required size, required data, required index}) {
           color: Colors.grey,
           blurRadius: 5,
           offset: Offset(3, 3),
-        )
+        ),
       ],
     ),
   );
+}
+
+Widget details() {
+  return Container();
 }

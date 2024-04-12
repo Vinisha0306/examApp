@@ -1,4 +1,3 @@
-import 'package:examapp/utils/all_product_data.dart';
 import 'package:flutter/material.dart';
 
 Widget category({required size, required e, required cat}) {

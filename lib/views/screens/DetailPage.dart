@@ -44,9 +44,9 @@ class _DetailState extends State<DetailPage> {
                 children: [
                   Row(
                     children: List.generate(
-                        data['images'].length,
-                        (index) =>
-                            Image1(size: size, data: data, index: index)),
+                      data['images'].length,
+                      (index) => Image1(size: size, data: data, index: index),
+                    ),
                   ),
                 ],
               ),

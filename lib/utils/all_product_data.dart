@@ -1932,4 +1932,4 @@ List<String> adi = [
   'assets/images/ad6.jpg',
 ];
 
-List cartProducts=[];
+List<Map<String, dynamic>> cartProducts = [];

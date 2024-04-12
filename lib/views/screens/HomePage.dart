@@ -1,10 +1,9 @@
 import 'dart:developer';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:examapp/utils/MyRoutes.dart';
 import 'package:examapp/views/commponets/ad_container.dart';
 import 'package:examapp/views/commponets/category.dart';
 import 'package:examapp/views/commponets/row1.dart';
-import 'package:examapp/views/commponets/row2.dart';
 import 'package:flutter/material.dart';
 import 'package:examapp/utils/all_product_data.dart';
 
@@ -35,6 +34,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: Drawer(
+        child: Padding(
+          padding: EdgeInsets.zero,
+          child: DrawerHeader(
+            decoration: const BoxDecoration(),
+            child: Stack(
+              children: [
+                Container(
+                  height: size.height * 0.15,
+                  width: size.width * 0.45,
+                  decoration: const BoxDecoration(
+                    color: Colors.grey,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: const Text(
           "Home",
@@ -43,10 +61,7 @@ class _HomePageState extends State<HomePage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        leading: const Icon(
-          Icons.menu_open_sharp,
-          color: Colors.white,
-        ),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           GestureDetector(
             onTap: () {
@@ -67,13 +82,17 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                  adi.length,
-                  (index) => ad(size: size, index: index),
-                ),
+            CarouselSlider(
+              items: List.generate(
+                adi.length,
+                (index) => ad(size: size, index: index),
+              ),
+              options: CarouselOptions(
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+                height: size.height * 0.3,
+                enableInfiniteScroll: true,
+                enlargeCenterPage: true,
               ),
             ),
             SingleChildScrollView(
@@ -101,29 +120,13 @@ class _HomePageState extends State<HomePage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: List.generate(
-                    products.length ~/ 2,
-                    (index) => SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                    MyRoutes.DetailPage,
-                                    arguments: products[index * 2]);
-                              },
-                              child: row1(
-                                  size: size, index: index, context: context)),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                    MyRoutes.DetailPage,
-                                    arguments: products[index * 2 + 1]);
-                              },
-                              child: row2(
-                                  size: size, index: index, context: context)),
-                        ],
-                      ),
+                    products.length,
+                    (index) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(MyRoutes.DetailPage,
+                            arguments: products[index]);
+                      },
+                      child: row1(size: size, index: index, context: context),
                     ),
                   ),
                 ),

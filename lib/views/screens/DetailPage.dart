@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:examapp/utils/all_product_data.dart';
 import 'package:examapp/utils/MyRoutes.dart';
@@ -38,21 +40,21 @@ class _DetailState extends State<DetailPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Column(
-                children: [
-                  Row(
-                    children: List.generate(
-                      data['images'].length,
-                      (index) => Image1(size: size, data: data, index: index),
-                    ),
-                  ),
-                ],
+            CarouselSlider(
+              items: List.generate(
+                data['images'].length,
+                (index) => Image1(size: size, data: data, index: index),
+              ),
+              options: CarouselOptions(
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+                height: size.height * 0.3,
+                enableInfiniteScroll: true,
+                enlargeCenterPage: true,
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -61,22 +63,31 @@ class _DetailState extends State<DetailPage> {
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Price : \$ ${data['price'].toString()}",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    "\$ ${data['price'].toString()}",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   Text(
                     data['description'],
                     style: const TextStyle(
                       color: Colors.black54,
-                      fontSize: 12,
+                      fontSize: 18,
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   RatingBarIndicator(
                     rating: double.parse(data['rating'].toString()),

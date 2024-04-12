@@ -19,6 +19,15 @@ class _CartPageState extends State<CartPage> {
           'Cart page',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(

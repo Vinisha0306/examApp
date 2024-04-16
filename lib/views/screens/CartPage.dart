@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:examapp/utils/all_product_data.dart';
 import 'package:examapp/views/commponets/row1.dart';
@@ -10,6 +11,10 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  void getState() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -24,7 +29,7 @@ class _CartPageState extends State<CartPage> {
             Navigator.pop(context);
           },
           icon: const Icon(
-            Icons.arrow_back,
+            CupertinoIcons.back,
             color: Colors.white,
           ),
         ),
@@ -37,10 +42,12 @@ class _CartPageState extends State<CartPage> {
             children: List.generate(
               cartProducts.length,
               (index) => crow1(
-                  size: size,
-                  data: cartProducts,
-                  context: context,
-                  index: index),
+                size: size,
+                data: cartProducts,
+                context: context,
+                index: index,
+                getState: getState,
+              ),
             ),
           ),
         ),

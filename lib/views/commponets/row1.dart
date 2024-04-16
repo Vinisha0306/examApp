@@ -85,7 +85,12 @@ Widget row1({required size, required index, required context}) {
   );
 }
 
-Widget crow1({required size, required index, required context, required data}) {
+Widget crow1(
+    {required size,
+    required index,
+    required context,
+    required data,
+    required getState}) {
   return Container(
     height: size.height * 0.2,
     width: size.width - 32,
@@ -158,6 +163,15 @@ Widget crow1({required size, required index, required context, required data}) {
                   ),
                 ],
               ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              cartProducts.remove(data[index]);
+              getState();
+            },
+            icon: const Icon(
+              Icons.delete,
             ),
           ),
         ],
